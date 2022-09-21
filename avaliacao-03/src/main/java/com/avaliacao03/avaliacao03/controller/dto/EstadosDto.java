@@ -13,14 +13,16 @@ public class EstadosDto {
 	private String capital;
 	private Double area;
 	
-	public EstadosDto(Long id, String nome, String regiao, Long populacao, String capital, Double area) {
-		this.id = id;
-		this.nome = nome;
-		this.regiao = regiao;
-		this.populacao = populacao;
-		this.capital = capital;
-		this.area = area;
+	public EstadosDto(Estado estado) {
+		this.id = estado.getId();
+		this.nome = estado.getNome();
+		this.regiao = estado.getNome();
+		this.populacao = estado.getPopulacao();
+		this.capital = estado.getCapital();
+		this.area = estado.getArea();
 	}
+
+	
 
 	public Long getId() {
 		return id;
@@ -50,16 +52,7 @@ public class EstadosDto {
 		//Fiz assim só pra entender melhor o funcionamento, ainda não fiz o curso de Collections :)
 		List<EstadosDto> estadosDto = new ArrayList<>();
 		for(int i = 0; i < estados.size(); i++) {
-			estadosDto.add(
-					new EstadosDto(
-							estados.get(i).getId(),
-							estados.get(i).getNome(),
-							estados.get(i).getRegiao(),
-							estados.get(i).getPopulacao(),
-							estados.get(i).getCapital(),
-							estados.get(i).getArea()
-							)
-					);
+			estadosDto.add(new EstadosDto(estados.get(i)));
 		}
 		return estadosDto;
 	}	
