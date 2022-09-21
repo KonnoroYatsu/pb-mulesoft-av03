@@ -22,8 +22,8 @@ public class EstadosController {
 		estado.setNome("São Paulo");
 		estado.setRegiao("Sudeste");
 		estado.setPopulacao(44000000);
-		estado.setArea(248.209);
 		estado.setCapital("São Paulo");
+		estado.setArea(248.209);
 		
 		return EstadosDto.converter(Arrays.asList(estado, estado, estado));
 	}
