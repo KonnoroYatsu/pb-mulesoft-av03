@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.avaliacao03.avaliacao03.controller.dto.UsuariosDto;
 import com.avaliacao03.avaliacao03.modelo.Usuario;
 
 @RestController
@@ -14,7 +15,7 @@ public class UsuariosController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/usuarios")
-	public List<Usuario> listar(){
+	public List<UsuariosDto> listar(){
 		Usuario usuario = new Usuario();
 		
 		usuario.setId(1);
@@ -22,7 +23,6 @@ public class UsuariosController {
 		usuario.setEmail("joao_teste@live.com");
 		usuario.setSenha("SenhaTeste123");
 		
-		return Arrays.asList(usuario, usuario, usuario);
-	}
-	
+		return UsuariosDto.converter(Arrays.asList(usuario, usuario, usuario));
+	}	
 }

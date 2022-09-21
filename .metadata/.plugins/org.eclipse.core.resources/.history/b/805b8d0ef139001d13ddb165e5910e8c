@@ -1,0 +1,5 @@
+package com.avaliacao03.avaliacao03.controller.dto;
+
+public class UsuariosDto {
+
+}

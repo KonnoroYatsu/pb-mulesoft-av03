@@ -1,0 +1,10 @@
+package com.avaliacao03.avaliacao03.controller.dto;
+
+public class EstadosDto {
+	private Long id;
+	private String nome;
+	private String regiao;
+	private Double populacao;
+	private String capital;
+	private Double area;
+}

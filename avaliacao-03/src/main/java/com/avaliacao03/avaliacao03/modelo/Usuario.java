@@ -1,12 +1,12 @@
 package com.avaliacao03.avaliacao03.modelo;
 
 public class Usuario {
-	private Long id;
+	private long id;
 	private String nome;
 	private String email;
 	private String senha;
 	
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 	public void setId(long i) {
