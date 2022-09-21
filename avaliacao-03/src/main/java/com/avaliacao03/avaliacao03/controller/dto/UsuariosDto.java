@@ -9,8 +9,6 @@ public class UsuariosDto {
 	private long id;
 	private String nome;
 	private String email;
-	
-	public UsuariosDto() {}
 
 	public UsuariosDto(long id, String nome, String email) {
 		this.id = id;

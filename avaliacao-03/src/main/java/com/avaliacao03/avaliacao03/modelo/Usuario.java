@@ -8,15 +8,15 @@ import javax.persistence.Id;
 @Entity
 public class Usuario {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String nome;
 	private String email;
 	private String senha;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long i) {
+	public void setId(Long i) {
 		this.id = i;
 	}
 	public String getNome() {

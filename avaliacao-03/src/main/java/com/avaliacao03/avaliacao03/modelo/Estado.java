@@ -8,17 +8,17 @@ import javax.persistence.Id;
 @Entity
 public class Estado {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String nome;
 	private String regiao;
-	private long populacao;
+	private Long populacao;
 	private String capital;
-	private double area;
+	private Double area;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -33,10 +33,10 @@ public class Estado {
 	public void setRegiao(String regiao) {
 		this.regiao = regiao;
 	}
-	public long getPopulacao() {
+	public Long getPopulacao() {
 		return populacao;
 	}
-	public void setPopulacao(long populacao) {
+	public void setPopulacao(Long populacao) {
 		this.populacao = populacao;
 	}
 	public String getCapital() {
@@ -45,10 +45,10 @@ public class Estado {
 	public void setCapital(String capital) {
 		this.capital = capital;
 	}
-	public double getArea() {
+	public Double getArea() {
 		return area;
 	}
-	public void setArea(double d) {
+	public void setArea(Double d) {
 		this.area = d;
 	}
 }

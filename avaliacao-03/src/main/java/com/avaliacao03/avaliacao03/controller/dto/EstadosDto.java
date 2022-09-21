@@ -6,16 +6,14 @@ import java.util.List;
 import com.avaliacao03.avaliacao03.modelo.Estado;
 
 public class EstadosDto {
-	private long id;
+	private Long id;
 	private String nome;
 	private String regiao;
-	private long populacao;
+	private Long populacao;
 	private String capital;
-	private double area;
+	private Double area;
 	
-	public EstadosDto() {}
-
-	public EstadosDto(long id, String nome, String regiao, long populacao, String capital, double area) {
+	public EstadosDto(Long id, String nome, String regiao, Long populacao, String capital, Double area) {
 		this.id = id;
 		this.nome = nome;
 		this.regiao = regiao;
@@ -24,7 +22,7 @@ public class EstadosDto {
 		this.area = area;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -36,7 +34,7 @@ public class EstadosDto {
 		return regiao;
 	}
 
-	public long getPopulacao() {
+	public Long getPopulacao() {
 		return populacao;
 	}
 
@@ -44,7 +42,7 @@ public class EstadosDto {
 		return capital;
 	}
 
-	public double getArea() {
+	public Double getArea() {
 		return area;
 	}
 
