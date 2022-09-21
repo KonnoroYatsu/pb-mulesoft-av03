@@ -1,0 +1,12 @@
+package com.avaliacao03.avaliacao03.modelo;
+
+public class Estado {
+	private Long id;
+	private String nome;
+	private String regiao;
+	private Long populacao;
+	private String capital;
+	private String area;
+	
+	
+}

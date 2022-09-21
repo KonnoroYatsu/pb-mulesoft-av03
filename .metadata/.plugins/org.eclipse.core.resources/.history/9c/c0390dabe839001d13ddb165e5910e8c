@@ -1,0 +1,47 @@
+package com.avaliacao03.avaliacao03.modelo;
+
+public class Estado {
+	private Long id;
+	private String nome;
+	private String regiao;
+	private Long populacao;
+	private String capital;
+	private Double area;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(long i) {
+		this.id = i;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getRegiao() {
+		return regiao;
+	}
+	public void setRegiao(String regiao) {
+		this.regiao = regiao;
+	}
+	public Long getPopulacao() {
+		return populacao;
+	}
+	public void setPopulacao(Long populacao) {
+		this.populacao = populacao;
+	}
+	public String getCapital() {
+		return capital;
+	}
+	public void setCapital(String capital) {
+		this.capital = capital;
+	}
+	public Long getArea() {
+		return area;
+	}
+	public void setArea(double d) {
+		this.area = d;
+	}
+}

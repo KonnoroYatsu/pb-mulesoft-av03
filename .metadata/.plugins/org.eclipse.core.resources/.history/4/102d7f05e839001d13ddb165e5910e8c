@@ -1,0 +1,8 @@
+package com.avaliacao03.avaliacao03.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping(value = "/estados")
+public class EstadosController {
+
+}
