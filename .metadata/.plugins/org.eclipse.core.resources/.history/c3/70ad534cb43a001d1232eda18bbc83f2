@@ -1,0 +1,5 @@
+package com.avaliacao03.avaliacao03.config.validacao;
+
+public class ErroDeValidacao {
+
+}

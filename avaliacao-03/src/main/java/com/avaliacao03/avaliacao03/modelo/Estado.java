@@ -15,6 +15,16 @@ public class Estado {
 	private String capital;
 	private Double area;
 	
+	public Estado() {}
+	
+	public Estado(String nome, String regiao, Long populacao, String capital, Double area) {
+		this.nome = nome;
+		this.regiao = regiao;
+		this.populacao = populacao;
+		this.capital = capital;
+		this.area = area;
+	}
+
 	public Long getId() {
 		return id;
 	}

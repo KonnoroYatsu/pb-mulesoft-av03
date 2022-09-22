@@ -1,0 +1,10 @@
+package com.avaliacao03.avaliacao03.config.validacao;
+
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice
+public class ErroDeValidacaoHandler {
+
+	
+	
+}

@@ -1,0 +1,56 @@
+package com.avaliacao03.avaliacao03.controller.form;
+
+import com.avaliacao03.avaliacao03.modelo.Estado;
+
+public class EstadosForm {
+	
+	private String nome;
+	private String regiao;
+	private Long populacao;
+	private String capital;
+	private Double area;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getRegiao() {
+		return regiao;
+	}
+
+	public void setRegiao(String regiao) {
+		this.regiao = regiao;
+	}
+
+	public Long getPopulacao() {
+		return populacao;
+	}
+
+	public void setPopulacao(Long populacao) {
+		this.populacao = populacao;
+	}
+
+	public String getCapital() {
+		return capital;
+	}
+
+	public void setCapital(String capital) {
+		this.capital = capital;
+	}
+
+	public Double getArea() {
+		return area;
+	}
+
+	public void setArea(Double area) {
+		this.area = area;
+	}
+
+	public Estado converter() {
+		return new Estado(this.nome, this.regiao, this.populacao, this.capital, this.area);
+	}
+}
