@@ -70,7 +70,7 @@ public class EstadosForm {
 			return new Estado(this.nome, this.regiao, this.populacao, this.capital, this.area);
 		}
 		catch (Exception e) {
-			throw new RegiaoInvalidaException(this.regiao, "regiao");
+			throw new RegiaoInvalidaException(this.regiao);
 		}
 	}
 
@@ -79,7 +79,7 @@ public class EstadosForm {
 		try {
 			estado.setRegiao(Regiao.valueOf(this.regiao));
 		}catch (Exception e) {
-			throw new RegiaoInvalidaException(this.regiao, "regiao");
+			throw new RegiaoInvalidaException(this.regiao);
 		}
 		estado.setPopulacao(this.populacao);
 		estado.setCapital(this.capital);

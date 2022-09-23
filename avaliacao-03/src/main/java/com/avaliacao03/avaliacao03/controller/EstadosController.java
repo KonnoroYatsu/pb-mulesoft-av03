@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.avaliacao03.avaliacao03.config.RegiaoInvalidaException;
 import com.avaliacao03.avaliacao03.controller.dto.EstadosDto;
 import com.avaliacao03.avaliacao03.controller.form.EstadosForm;
 import com.avaliacao03.avaliacao03.modelo.Estado;
@@ -39,7 +38,7 @@ public class EstadosController {
 	private EstadoRepository estadoRepository;
 	
 	@GetMapping
-	public Page<EstadosDto> listar(
+	public ResponseEntity<Page<EstadosDto>> listar(
 			@RequestParam(required = false) String filtroRegiao,
 			@RequestParam(required = false) String ordenacao,
 			@PageableDefault(size = 10) Pageable paginacao){
@@ -49,16 +48,20 @@ public class EstadosController {
 		}
 		if(filtroRegiao == null) {
 			Page<Estado> estados = estadoRepository.findAll(paginacao);
-			return EstadosDto.converter(estados);
+			return ResponseEntity.ok(EstadosDto.converter(estados));
 		}else {
 			Regiao regiao;
 			try {
 				regiao = Regiao.valueOf(filtroRegiao);
-			}catch (Exception e) {
-				throw new RegiaoInvalidaException(filtroRegiao, "filtro");
+			}catch (IllegalArgumentException e) {
+				return ResponseEntity.notFound().build();
 			}
 			Page<Estado> estados = estadoRepository.findByRegiao(regiao, paginacao);
-			return EstadosDto.converter(estados);
+			if(estados.getSize() > 0) {
+				return ResponseEntity.ok(EstadosDto.converter(estados));
+			}else {
+				return ResponseEntity.notFound().build();
+			}		
 		}		
 	}
 	
