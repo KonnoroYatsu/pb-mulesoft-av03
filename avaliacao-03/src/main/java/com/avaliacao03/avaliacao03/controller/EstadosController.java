@@ -1,13 +1,17 @@
 package com.avaliacao03.avaliacao03.controller;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.avaliacao03.avaliacao03.config.RegiaoInvalidaException;
 import com.avaliacao03.avaliacao03.controller.dto.EstadosDto;
 import com.avaliacao03.avaliacao03.controller.form.EstadosForm;
 import com.avaliacao03.avaliacao03.modelo.Estado;
+import com.avaliacao03.avaliacao03.modelo.Regiao;
 import com.avaliacao03.avaliacao03.repository.EstadoRepository;
 
 @RestController
@@ -33,12 +39,25 @@ public class EstadosController {
 	private EstadoRepository estadoRepository;
 	
 	@GetMapping
-	public List<EstadosDto> listar(@RequestParam(required = false) String filtroRegiao){
+	public Page<EstadosDto> listar(
+			@RequestParam(required = false) String filtroRegiao,
+			@RequestParam(required = false) String ordenacao,
+			@PageableDefault(size = 10) Pageable paginacao){
+		
+		if(ordenacao != null) {
+			paginacao = PageRequest.of(0, 10, Sort.by(ordenacao));
+		}
 		if(filtroRegiao == null) {
-			List<Estado> estados = estadoRepository.findAll();
+			Page<Estado> estados = estadoRepository.findAll(paginacao);
 			return EstadosDto.converter(estados);
 		}else {
-			List<Estado> estados = estadoRepository.findByRegiao(filtroRegiao);
+			Regiao regiao;
+			try {
+				regiao = Regiao.valueOf(filtroRegiao);
+			}catch (Exception e) {
+				throw new RegiaoInvalidaException(filtroRegiao, "filtro");
+			}
+			Page<Estado> estados = estadoRepository.findByRegiao(regiao, paginacao);
 			return EstadosDto.converter(estados);
 		}		
 	}

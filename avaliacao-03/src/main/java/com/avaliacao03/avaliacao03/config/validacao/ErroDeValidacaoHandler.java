@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.avaliacao03.avaliacao03.config.RegiaoInvalidaException;
+
 @RestControllerAdvice
 public class ErroDeValidacaoHandler {
 
@@ -30,5 +32,11 @@ public class ErroDeValidacaoHandler {
 			erros.add(str);
 		}
 		return erros;
+	}
+	
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(RegiaoInvalidaException.class)
+	public String handler(RegiaoInvalidaException exception) {
+		return exception.getMessage();
 	}
 }	

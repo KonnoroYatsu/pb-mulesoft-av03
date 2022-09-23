@@ -1,14 +1,14 @@
 package com.avaliacao03.avaliacao03.controller.dto;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import com.avaliacao03.avaliacao03.modelo.Estado;
+import com.avaliacao03.avaliacao03.modelo.Regiao;
 
 public class EstadosDto {
 	private Long id;
 	private String nome;
-	private String regiao;
+	private Regiao regiao;
 	private Long populacao;
 	private String capital;
 	private Double area;
@@ -22,8 +22,6 @@ public class EstadosDto {
 		this.area = estado.getArea();
 	}
 
-	
-
 	public Long getId() {
 		return id;
 	}
@@ -32,7 +30,7 @@ public class EstadosDto {
 		return nome;
 	}
 
-	public String getRegiao() {
+	public Regiao getRegiao() {
 		return regiao;
 	}
 
@@ -48,11 +46,7 @@ public class EstadosDto {
 		return area;
 	}
 
-	public static List<EstadosDto> converter(List<Estado> estados) {
-		List<EstadosDto> estadosDto = new ArrayList<>();
-		for(int i = 0; i < estados.size(); i++) {
-			estadosDto.add(new EstadosDto(estados.get(i)));
-		}
-		return estadosDto;
+	public static Page<EstadosDto> converter(Page<Estado> estados) {
+		return estados.map(EstadosDto::new);
 	}	
 }

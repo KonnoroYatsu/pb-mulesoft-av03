@@ -4,7 +4,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.avaliacao03.avaliacao03.config.RegiaoInvalidaException;
 import com.avaliacao03.avaliacao03.modelo.Estado;
+import com.avaliacao03.avaliacao03.modelo.Regiao;
 import com.avaliacao03.avaliacao03.repository.EstadoRepository;
 
 public class EstadosForm {
@@ -64,12 +66,21 @@ public class EstadosForm {
 	}
 
 	public Estado converter() {
-		return new Estado(this.nome, this.regiao, this.populacao, this.capital, this.area);
+		try {
+			return new Estado(this.nome, this.regiao, this.populacao, this.capital, this.area);
+		}
+		catch (Exception e) {
+			throw new RegiaoInvalidaException(this.regiao, "regiao");
+		}
 	}
 
 	public Estado atualizar(Estado estado, EstadoRepository estadoRepository) {
 		estado.setNome(this.nome);
-		estado.setRegiao(this.regiao);
+		try {
+			estado.setRegiao(Regiao.valueOf(this.regiao));
+		}catch (Exception e) {
+			throw new RegiaoInvalidaException(this.regiao, "regiao");
+		}
 		estado.setPopulacao(this.populacao);
 		estado.setCapital(this.capital);
 		estado.setArea(this.area);

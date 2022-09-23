@@ -1,0 +1,10 @@
+package com.avaliacao03.avaliacao03.config;
+
+public class RegiaoInvalidaException extends RuntimeException{
+	
+	private static final long serialVersionUID = 1L;
+	
+	public RegiaoInvalidaException(String msg) {
+		super(msg);
+	}	
+}

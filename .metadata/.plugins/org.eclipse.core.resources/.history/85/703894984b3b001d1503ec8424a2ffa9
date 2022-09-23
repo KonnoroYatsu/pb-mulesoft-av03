@@ -1,0 +1,58 @@
+package com.avaliacao03.avaliacao03.controller.dto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.avaliacao03.avaliacao03.modelo.Estado;
+
+public class EstadosDto {
+	private Long id;
+	private String nome;
+	private String regiao;
+	private Long populacao;
+	private String capital;
+	private Double area;
+	
+	public EstadosDto(Estado estado) {
+		this.id = estado.getId();
+		this.nome = estado.getNome();
+		this.regiao = estado.getRegiao();
+		this.populacao = estado.getPopulacao();
+		this.capital = estado.getCapital();
+		this.area = estado.getArea();
+	}
+
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getRegiao() {
+		return regiao;
+	}
+
+	public Long getPopulacao() {
+		return populacao;
+	}
+
+	public String getCapital() {
+		return capital;
+	}
+
+	public Double getArea() {
+		return area;
+	}
+
+	public static List<EstadosDto> converter(List<Estado> estados) {
+		List<EstadosDto> estadosDto = new ArrayList<>();
+		for(int i = 0; i < estados.size(); i++) {
+			estadosDto.add(new EstadosDto(estados.get(i)));
+		}
+		return estadosDto;
+	}	
+}
