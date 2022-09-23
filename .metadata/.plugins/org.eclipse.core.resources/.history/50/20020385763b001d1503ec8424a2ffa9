@@ -1,0 +1,6 @@
+package com.avaliacao03.avaliacao03.modelo;
+
+public class Perfil {
+	private Long id;
+	private String nome:
+}
