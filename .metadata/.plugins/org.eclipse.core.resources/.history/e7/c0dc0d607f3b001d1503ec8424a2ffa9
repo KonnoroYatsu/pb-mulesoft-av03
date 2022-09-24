@@ -1,0 +1,19 @@
+package com.avaliacao03.avaliacao03.config.security;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+
+import com.avaliacao03.avaliacao03.modelo.Usuario;
+
+import io.jsonwebtoken.Jwts;
+
+@Service
+public class TokenService {
+
+	public String gerarToken(Authentication authenticacao) {
+		Usuario logado = (Usuario) authenticacao.getPrincipal();
+		return Jwts.builder()
+				.setIssuer("API de Estados")
+				.setSubject(logado.getId().toString());
+	}
+}

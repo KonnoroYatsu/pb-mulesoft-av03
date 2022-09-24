@@ -1,0 +1,31 @@
+package com.avaliacao03.avaliacao03.config.security;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+
+import com.avaliacao03.avaliacao03.modelo.Usuario;
+
+import io.jsonwebtoken.Jwts;
+
+@Service
+public class TokenService {
+	
+	@Value("${forum.jwt.expiration}")
+	private String expiration;
+	
+	@Value("${forum.jwt.secret}")
+	private String secret;
+
+	public String gerarToken(Authentication authenticacao) {
+		Usuario logado = (Usuario) authenticacao.getPrincipal();
+		Date hoje = new Date();
+		return Jwts.builder()
+				.setIssuer("API de Estados")
+				.setSubject(logado.getId().toString())
+				.setIssuedAt(hoje)
+				.setExpiration(hoje);
+	}
+}
