@@ -1,0 +1,6 @@
+package com.avaliacao03.avaliacao03.config.security;
+
+@Service
+public class TokenService {
+
+}

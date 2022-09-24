@@ -1,0 +1,8 @@
+package com.avaliacao03.avaliacao03.config.security;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class AutenticacaoService {
+
+}
