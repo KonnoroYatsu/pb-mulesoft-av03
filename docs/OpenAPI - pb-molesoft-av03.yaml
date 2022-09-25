@@ -1,0 +1,360 @@
+openapi: 3.0.1
+info:
+  title: API - pb-molesoft-av03
+  description: API de gerenciamento de estados.
+  version: 0.0.1
+  contact:
+    name: Suporte
+    email: joao_teste@live.com
+    url: https://github.com/KonnoroYatsu
+servers:
+  - url: http://localhost:8080/api/v1/
+    description: API de estados.
+tags:
+  - name: Estados
+    description: Gerenciamento dos estados
+  - name: Usuarios
+    description: Gerenciamento dos usuários
+  - name: Autenticação
+    description: Realização da autenticação por Token JWT
+paths:
+  /autenticacao:
+    post:
+      tags: 
+        - Autenticação
+      summary: Realizar autenticação.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  default: ""
+                senha:
+                  type: string
+                  default: ""
+      responses:
+        '200':
+          description: Autenticação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  tipo:
+                    type: string
+        '400':
+          description: Caso não seja encontra o usuário na base de dados
+          content:
+            application/json:
+              example: Dados inválidos.
+  /estados:
+    get:
+      tags: 
+        - Estados
+      summary: Busca todos os estados cadastrados.
+      parameters:
+        - in: query
+          name: filtroRegiao
+          schema:
+            type: string
+            enum: ["Norte", "Nordeste", "Sul", "Sudeste", "Centro_Oeste"]
+          description: Permite a listagem dos estados de uma determinada regiao.
+            
+        - in: query
+          name: ordenacao
+          schema:
+            type: string
+            enum: ["id", "nome", "regiao", "populacao", "capital", "area"]
+          description: Permite a ordenção da lista
+      description: Busca todos os estado cadastrado, permitindo filtro por deteminada regiao e ordenção por algum de seus atributos.
+      responses:
+        '200':
+          description: Consulta realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estados"
+    post:
+      tags: 
+        - Estados
+      summary: Adicionar um novo estado.
+      security: 
+      - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  default: ""
+                regiao:
+                  type: string
+                  enum: ["Norte", "Nordeste", "Sul", "Sudeste", "Centro_Oeste"]
+                populacao:
+                  type: integer
+                  format: int64
+                  default: 0
+                  minimum: 1
+                capital:
+                  type: string
+                  default: ""
+                area:
+                  type: integer
+                  format: double
+                  default: 0
+                  minimum: 1
+      responses:
+        '201':
+          description: Cadastro realizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estados"
+        '400':
+          description: Dependendo do valores inseridos no json será retornadado uma lista informando quais campos estão inválidos e quais foram os erros.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: Error - 'capital' não deve estar vazio
+  /estados/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    get:
+      tags: 
+        - Estados
+      summary: Recupera um estado especifico pelo ID.
+      responses:
+        '200':
+          description: Estado encontrado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estados"
+        '404':
+          description: Estado não encontrado.
+          content:
+            application/json:
+              example: Not Found.
+    put:
+      tags: 
+        - Estados
+      summary: Atualiza um estado especifico pelo ID.
+      security: 
+      - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  default: ""
+                regiao:
+                  type: string
+                  enum: ["Norte", "Nordes", "Sul", "Sudeste", "Centro_Oeste"]
+                populacao:
+                  type: integer
+                  format: int64
+                  minimum: 1
+                  default: 0
+                capital:
+                  type: string
+                  default: ""
+                area:
+                  type: integer
+                  format: double
+                  minimum: 1
+                  default: 0
+      responses:
+        '200':
+          description: Estado atualizado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estados"
+        '404':
+          description: Estado não encontrado.
+          content:
+            application/json:
+              example: Not Found.
+        '400':
+          description: Dependendo do valores inseridos no json será retornadado uma lista informando quais campos estão inválidos e quais foram os erros.
+          content:
+            application/json:
+              example: Error - 'nome' não deve estar vazio
+    delete:
+      tags: 
+        - Estados
+      summary: Deleta um estado especifico pelo ID.
+      security: 
+      - auth: []
+      responses:
+        '200':
+          description: Estado deletado com sucesso.
+          content:
+            application/json:
+              example: Ok.
+        '404':
+          description: Estado não encontrado.
+          content:
+            application/json:
+              example: Not Found.
+  /usuarios:
+    get:
+      tags: 
+        - Usuarios
+      summary: Busca todos os usuarios cadastrados.
+      responses:
+        '200':
+          description: Consulta realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    senha:
+                      type: string
+    post:
+      tags: 
+        - Usuarios
+      summary: Adicionar um novo usuario.
+      security: 
+      - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  default: ""
+                email:
+                  type: string
+                  default: ""
+                senha:
+                  type: string
+                  default: ""
+      responses:
+        '201':
+          description: Cadastro realizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuarios"
+        '400':
+          description: Dependendo do valores inseridos no json será retornadado uma lista informando quais campos estão inválidos e quais foram os erros ou se email já existe na base de dados.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: Error - 'email' não deve estar vazio
+  /usuarios/{id}:
+    put:
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      tags: 
+        - Usuarios
+      summary: Atualiza um usuario especifico pelo ID.
+      security: 
+      - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  default: ""
+                email:
+                  type: string
+                  default: ""
+                senha:
+                  type: string
+                  default: ""
+      responses:
+        '200':
+          description: Usuario atualizado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuarios"
+        '404':
+          description: Usuario não encontrado.
+          content:
+            application/json:
+              example: Not Found.
+        '400':
+          description: Dependendo do valores inseridos no json será retornadado uma lista informando quais campos estão inválidos e quais foram os erros ou se email já existe na base de dados.
+          content:
+            application/json:
+              example: Error - 'senha' não deve estar vazio
+components:
+  schemas:
+    Estados:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          nome:
+            type: string
+          regiao:
+            type: string
+          populacao:
+            type: integer
+            format: int64
+          capital:
+            type: string
+          area:
+            type: integer
+            format: double
+    Usuarios:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          nome:
+            type: string
+          email:
+            type: string
+          senha:
+            type: string
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

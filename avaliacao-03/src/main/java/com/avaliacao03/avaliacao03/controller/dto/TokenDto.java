@@ -3,11 +3,11 @@ package com.avaliacao03.avaliacao03.controller.dto;
 public class TokenDto {
 
 	private String token;
-	private String string;
+	private String tipo;
 
-	public TokenDto(String token, String string) {
+	public TokenDto(String token, String tipo) {
 		this.token = token;
-		this.string = string;
+		this.tipo = tipo;
 	}
 
 	public String getToken() {
@@ -15,6 +15,6 @@ public class TokenDto {
 	}
 
 	public String getString() {
-		return string;
+		return tipo;
 	}
 }

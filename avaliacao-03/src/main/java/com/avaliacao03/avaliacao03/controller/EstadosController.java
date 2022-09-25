@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ import com.avaliacao03.avaliacao03.modelo.Regiao;
 import com.avaliacao03.avaliacao03.repository.EstadoRepository;
 
 @RestController
+@CrossOrigin()
 @RequestMapping(value = "/api/v1/estados")
 public class EstadosController {
 	
