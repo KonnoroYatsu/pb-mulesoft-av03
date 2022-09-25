@@ -36,7 +36,9 @@ public class ErroDeValidacaoHandler {
 	
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(RegiaoInvalidaException.class)
-	public String handler(RegiaoInvalidaException exception) {
-		return exception.getMessage();
+	public List<String> handler(RegiaoInvalidaException exception) {
+		List<String> erro = new ArrayList<String>();
+		erro.add(exception.getMessage());
+		return erro;
 	}
 }	
