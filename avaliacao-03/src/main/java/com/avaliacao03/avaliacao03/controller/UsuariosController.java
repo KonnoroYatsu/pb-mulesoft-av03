@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.avaliacao03.avaliacao03.config.exception.EmailExistenteException;
 import com.avaliacao03.avaliacao03.controller.dto.UsuariosDto;
 import com.avaliacao03.avaliacao03.controller.form.UsuarioForm;
 import com.avaliacao03.avaliacao03.modelo.Usuario;
@@ -40,6 +41,9 @@ public class UsuariosController {
 	@Transactional
 	public ResponseEntity<UsuariosDto> cadastrar(@RequestBody @Valid UsuarioForm usuarioForm,
 			UriComponentsBuilder uriBuilder){
+		if(usuarioRepository.findByEmail(usuarioForm.getEmail()).isPresent()) {
+			throw new EmailExistenteException();
+		}
 		Usuario usuario = usuarioForm.converter();
 		usuarioRepository.save(usuario);
 		

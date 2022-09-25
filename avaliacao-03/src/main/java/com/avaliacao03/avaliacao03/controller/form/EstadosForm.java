@@ -4,7 +4,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.avaliacao03.avaliacao03.config.RegiaoInvalidaException;
+import com.avaliacao03.avaliacao03.config.exception.RegiaoInvalidaException;
 import com.avaliacao03.avaliacao03.modelo.Estado;
 import com.avaliacao03.avaliacao03.modelo.Regiao;
 import com.avaliacao03.avaliacao03.repository.EstadoRepository;
