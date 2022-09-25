@@ -3,8 +3,9 @@ package com.avaliacao03.avaliacao03.controller.form;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.avaliacao03.avaliacao03.modelo.Usuario;
-import com.avaliacao03.avaliacao03.repository.UsuarioRepository;
 
 public class UsuarioForm {
 	@NotNull @NotEmpty
@@ -41,14 +42,13 @@ public class UsuarioForm {
 	}
 
 	public Usuario converter() {
-		return new Usuario(this.nome, this.email, this.senha);
+		return new Usuario(this.nome, this.email, new BCryptPasswordEncoder().encode(this.senha));
 	}
 
-	public Usuario atualizar(Usuario usuario, UsuarioRepository usuarioRepository) {
+	public Usuario atualizar(Usuario usuario) {
 		usuario.setNome(this.nome);
 		usuario.setEmail(this.email);
-		usuario.setSenha(this.senha);
-		
+		usuario.setSenha(new BCryptPasswordEncoder().encode(this.senha));
 		return usuario;
 	}
 

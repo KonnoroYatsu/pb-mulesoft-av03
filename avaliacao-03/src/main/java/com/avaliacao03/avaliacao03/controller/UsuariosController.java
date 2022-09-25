@@ -56,7 +56,7 @@ public class UsuariosController {
 	public ResponseEntity<UsuariosDto> atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioForm usuarioForm){
 		Optional<Usuario> optional = usuarioRepository.findById(id);
 		if(optional.isPresent()) {
-			Usuario usuario = usuarioForm.atualizar(optional.get(), usuarioRepository);
+			Usuario usuario = usuarioForm.atualizar(optional.get());
 			return ResponseEntity.ok(new UsuariosDto(usuario));
 		}
 		return ResponseEntity.badRequest().build();
